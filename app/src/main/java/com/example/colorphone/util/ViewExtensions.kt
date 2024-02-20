@@ -1,5 +1,6 @@
 package com.example.colorphone.util
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
@@ -13,6 +14,7 @@ import android.os.Environment
 import android.os.StatFs
 import android.os.StrictMode
 import android.os.SystemClock
+import android.provider.MediaStore
 import android.text.format.Formatter
 import android.util.DisplayMetrics
 import android.util.TypedValue
@@ -28,6 +30,8 @@ import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.colorphone.model.Folder.Companion.IS_IMAGE
+import com.example.colorphone.model.Folder.Companion.IS_VIDEO
 import java.util.Locale
 import java.util.TimeZone
 
@@ -323,4 +327,52 @@ fun Context.getIp():String{
     val wifiInfo = wifiMgr!!.connectionInfo
     val ip = wifiInfo.ipAddress
     return Formatter.formatIpAddress(ip)
+}
+
+fun Context.getDisplayWidth(): Float {
+    val displayMetrics = resources.displayMetrics
+    return displayMetrics.widthPixels.toFloat()
+}
+fun isVideo(path: String): Boolean {
+    return path.endsWith(".mp4") ||
+            path.endsWith(".avi") ||
+            path.endsWith(".mkv") ||
+            path.endsWith(".wmv") ||
+            path.endsWith(".mov") ||
+            path.endsWith(".flv") ||
+            path.endsWith(".3gp") ||
+            path.endsWith(".webm")
+}
+fun isImage(typeMedia: String): Int {
+    val list: MutableList<String> = mutableListOf()
+    list.add("jpg")
+    list.add("jpeg")
+    list.add("gif")
+    list.add("png")
+    list.add("svg")
+    list.add("webp")
+    list.add("pds")
+    list.add("ai")
+
+    list.find {
+        it == typeMedia.toLowerCase()
+    }?.let {
+        return IS_IMAGE
+    }
+    return IS_VIDEO
+}
+
+fun Activity.insertImage(path :String,uri: Uri){
+    MediaStore.Images.Media.insertImage(
+        this.contentResolver,
+        path,
+        "Color_Phone_Crop_Image_${System.currentTimeMillis()}",
+        "Color Phone Crop Image"
+    )
+    this.sendBroadcast(
+        Intent(
+            Intent.ACTION_MEDIA_SCANNER_FINISHED,
+            uri
+        )
+    )
 }

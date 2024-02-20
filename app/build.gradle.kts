@@ -83,7 +83,7 @@ dependencies {
 
     implementation("com.intuit.sdp:sdp-android:1.0.6")
 
-    // implementation("com.zxy.android:recovery:1.0.0")
+//     implementation("com.zxy.android:recovery:1.0.0")
 
 //    implementation(platform("com.google.firebase:firebase-bom:32.1.1"))
 //    implementation("com.google.firebase:firebase-crashlytics-ktx")
@@ -104,7 +104,7 @@ dependencies {
 
     val billing_version = "6.1.0"
     //   implementation("com.android.billingclient:billing-ktx:$billing_version")
-    //  implementation("com.github.yalantis:ucrop:2.2.8")
+      implementation("com.github.yalantis:ucrop:2.2.8")
 
     implementation("org.greenrobot:eventbus:3.3.1")
 

@@ -6,10 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.fragment.app.FragmentContainerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:text="Hello World!"
+        android:id="@+id/fragmentContainer"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph"
+        android:name="com.example.colorphone.base.MainNavHostFragment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

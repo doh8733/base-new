@@ -12,6 +12,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.example.colorphone.R
+import com.example.colorphone.ui.ImageViewModel
+import com.example.colorphone.util.HomeViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
@@ -25,10 +27,10 @@ abstract class BaseFragment<B : ViewBinding>(val inflate: Inflate<B>) : Fragment
 
     var viewHome: View? = null
 
-//    @OptIn(ExperimentalCoroutinesApi::class)
-//    val homeViewModel: HomeViewModel by activityViewModels()
-//
-//    val imageViewModel: ImageViewModel by activityViewModels()
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val homeViewModel: HomeViewModel by activityViewModels()
+
+    val imageViewModel: ImageViewModel by activityViewModels()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
